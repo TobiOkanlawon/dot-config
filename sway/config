@@ -32,6 +32,12 @@ output Virtual-1 res 1366x768
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+# Disable laptop screen (ouput) on screen lid shut, reenable on open
+
+# set $laptop_screen LVDS-1
+# bindswitch --reload --locked lid:on output $laptop_screen disable
+# bindswitch --reload --locked lid:off output $laptop_screen enable
+
 ### Idle configuration
 #
 # Example configuration:
@@ -59,9 +65,10 @@ output Virtual-1 res 1366x768
 #       tap enabled
 # }
 
-# input * {
-#       xkb_layout "uk"
-# }
+# setting the keyboard back to UK for sway
+input "1118:1874:Microsoft_Wired_Keyboard_400" {
+      xkb_layout gb
+}
 
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
