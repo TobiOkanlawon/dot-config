@@ -29,6 +29,10 @@ output Virtual-1 res 1366x768
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+output LVDS-1 position 1690 0
+output VGA-1 resolution 1600x900 position 0 0
+
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -101,6 +105,7 @@ input "1118:1874:Microsoft_Wired_Keyboard_400" {
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
+    
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -223,5 +228,19 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+# configuring swayidle to lock my screen after 30 minutes
+exec swayidle -w \
+     timeout 600 'swaylock -f' \
+     timeout 605 'swaymsg "output * dpms off"' \
+     resume 'swaymsg "output * dpms on"'
+
+# binding workspaces 1 and 2 to the laptop's monitor
+workspace 1 output LVDS-1
+workspace 2 output LVDS-1
+
+# binding workspace 3 and 4 to the DELL monitor
+workspace 3 output VGA-1
+workspace 4 output VGA-1
 
 include /etc/sway/config.d/*
